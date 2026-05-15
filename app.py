@@ -1,11 +1,11 @@
 from flask import Flask,request,render_template
 import numpy as np
 import pickle
+import os
 
-# importing model
-model = pickle.load(open('model.pkl','rb'))
-sc = pickle.load(open('standscaler.pkl','rb'))
-ms = pickle.load(open('minmaxscaler.pkl','rb'))
+model = pickle.load(open(os.path.join(os.path.dirname(__file__), 'model.pkl'), 'rb'))
+sc = pickle.load(open(os.path.join(os.path.dirname(__file__), 'standscaler.pkl'), 'rb'))
+ms = pickle.load(open(os.path.join(os.path.dirname(__file__), 'minmaxscaler.pkl'), 'rb'))
 
 # creating flask app
 app = Flask(__name__)
@@ -48,4 +48,4 @@ def predict():
 
 # python main
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
